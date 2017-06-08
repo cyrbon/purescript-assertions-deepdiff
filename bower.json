@@ -1,0 +1,19 @@
+{
+  "name": "purescript-assertions-deepdiff",
+  "homepage": "https://github.com/cyrbon/purescript-assertions-deepdiff",
+  "description": "Assertions about JS objects using deep diffs",
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "output",
+    "test",
+    "bower.json",
+    "package.json"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^3.0.0",
+    "purescript-spec": "^1.0.0"
+  }
+}

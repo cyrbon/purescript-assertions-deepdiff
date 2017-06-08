@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "clean": "rimraf output && rimraf .pulp-cache",
+    "build": "pulp build --censor-lib --strict",
+    "b": "rollup --config"
+  },
+  "dependencies": {
+    "rollup": "^0.41.6",
+    "rollup-plugin-purs": "^1.0.37"
+  },
+  "devDependencies": {
+    "pulp": "^9.0.1",
+    "purescript-psa": "^0.3.9",
+    "rimraf": "^2.5.0"
+  }
+}
