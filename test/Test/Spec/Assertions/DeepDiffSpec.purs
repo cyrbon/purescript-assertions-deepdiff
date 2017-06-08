@@ -48,3 +48,10 @@ deepDiffSpec =
 	    isJust c `shouldEqual` true
 	    maybe (pure unit) (\c' -> c'.changeType `shouldEqual` "deleted") c
 	    maybe (pure unit) (\c' -> c'.path `shouldEqual` "k1.n1.nn1") c
+	  it "detects created nested field" do
+	    let obj1 = { k1: { n1: { } }, k2: "v2" }
+                obj2 = { k2: "v2", k1: { n1: { nn1: "nn1v" } } }
+                c = findFirstDifference obj1 obj2
+	    isJust c `shouldEqual` true
+	    maybe (pure unit) (\c' -> c'.changeType `shouldEqual` "created") c
+	    maybe (pure unit) (\c' -> c'.path `shouldEqual` "k1.n1.nn1") c
