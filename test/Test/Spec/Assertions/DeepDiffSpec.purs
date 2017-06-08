@@ -24,3 +24,8 @@ deepDiffSpec =
 	  it "returns nothing when objects are identical" do
 	    let c = findFirstDifference { k1: "v1" } { k1: "v1" }
 	    isJust c `shouldEqual` false
+	  it "returns nothing when nested objects are identical" do
+	    let obj1 = { k1: { n1: { nn1: "nn1v" } } }
+	        obj2 = { k1: { n1: { nn1: "nn1v" } } }
+                c = findFirstDifference obj1 obj2
+	    isJust c `shouldEqual` false
