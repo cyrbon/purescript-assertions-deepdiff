@@ -29,3 +29,8 @@ deepDiffSpec =
 	        obj2 = { k1: { n1: { nn1: "nn1v" } } }
                 c = findFirstDifference obj1 obj2
 	    isJust c `shouldEqual` false
+	  it "is nothing when nested objects are identical and have other fields" do
+	    let obj1 = { k2: "v2", k1: { n1: { nn1: "nn1v" } } }
+	        obj2 = { k1: { n1: { nn1: "nn1v" } }, k2: "v2" }
+                c = findFirstDifference obj1 obj2
+	    isJust c `shouldEqual` false
