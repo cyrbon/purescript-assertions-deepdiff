@@ -34,3 +34,10 @@ deepDiffSpec =
 	        obj2 = { k1: { n1: { nn1: "nn1v" } }, k2: "v2" }
                 c = findFirstDifference obj1 obj2
 	    isJust c `shouldEqual` false
+	  it "detects change in nested objects" do
+	    let obj1 = { k2: "v2", k1: { n1: { nn1: "nn1v" } } }
+	        obj2 = { k1: { n1: { nn1: "nn1Changed" } }, k2: "v2" }
+                c = findFirstDifference obj1 obj2
+	    isJust c `shouldEqual` true
+	    maybe (pure unit) (\c' -> c'.changeType `shouldEqual` "changed") c
+	    maybe (pure unit) (\c' -> c'.path `shouldEqual` "k1.n1.nn1") c
