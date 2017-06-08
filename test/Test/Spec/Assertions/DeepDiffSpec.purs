@@ -21,3 +21,6 @@ deepDiffSpec =
 	    isJust c `shouldEqual` true
 	    maybe (pure unit) (\c' -> c'.changeType `shouldEqual` "changed") c
 	    maybe (pure unit) (\c' -> c'.path `shouldEqual` "k1") c
+	  it "returns nothing when objects are identical" do
+	    let c = findFirstDifference { k1: "v1" } { k1: "v1" }
+	    isJust c `shouldEqual` false
