@@ -5,7 +5,7 @@ module Test.Spec.Assertions.DeepDiff
   ( deepDiffsShouldBeEqual
   , deepDiffsShouldNotBeEqual
   , deepDiff
-  , getFirstChange
+  , findFirstDifference
   , getFirstChangeFromDiff
   , ObjectDiff
   , Change
@@ -36,8 +36,8 @@ getFirstChangeFromDiff = _getFirstChange (Just) (Nothing)
 
 -- | Take two raw objects, diff them and return the path to the first difference
 -- | alongside the type of that difference (changed, deleted, created).
-getFirstChange :: forall obj1 obj2. obj1 -> obj2 -> Maybe Change
-getFirstChange o1 o2 = getFirstChangeFromDiff $ deepDiff o1 o2
+findFirstDifference :: forall obj1 obj2. obj1 -> obj2 -> Maybe Change
+findFirstDifference o1 o2 = getFirstChangeFromDiff $ deepDiff o1 o2
 
 -- | Ensure that deep diffs of two JS objects are equal
 deepDiffsShouldBeEqual :: forall obj1 obj2 r. obj1 -> obj2 -> Aff r Unit
@@ -45,7 +45,7 @@ deepDiffsShouldBeEqual obj1 obj2 =
   maybe
     (pure unit)
     (\p -> fail $ "Objects differ. Path '" <> p.path <>  "' " <> p.changeType)
-    (getFirstChange obj1 obj2)
+    (findFirstDifference obj1 obj2)
 
 -- | Ensure that deep diffs of two JS objects are not equal
 deepDiffsShouldNotBeEqual :: forall obj1 obj2 r. obj1 -> obj2 -> Aff r Unit
@@ -53,4 +53,4 @@ deepDiffsShouldNotBeEqual obj1 obj2 =
   maybe
     (fail "Object diff is identical. Expected them to be different.")
     (const $ pure unit)
-    (getFirstChange obj1 obj2)
+    (findFirstDifference obj1 obj2)
