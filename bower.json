@@ -3,6 +3,10 @@
   "homepage": "https://github.com/cyrbon/purescript-assertions-deepdiff",
   "description": "Assertions about JS objects using deep diffs",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cyrbon/purescript-assertions-deepdiff"
+  },
   "ignore": [
     "**/.*",
     "bower_components",
